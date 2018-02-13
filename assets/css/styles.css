@@ -1,0 +1,365 @@
+.table1{
+  font:normal 15px raleway;
+}
+
+#welcome1{
+  text-align:center;
+  padding:40px;
+  background:url(../../assets/img/SAC.jpg) no-repeat;
+  background-size:cover;
+  margin-left:30px;
+  margin-right:30px;
+  margin-bottom:30px;
+}
+
+@media (max-width:767px) {
+  #welcome1{
+    background-size:cover;
+    margin-left:10px;
+    margin-right:10px;
+  }
+}
+
+#info{
+  margin-top:100px;
+}
+
+#carou{
+  text-align:center;
+  padding-left:100px;
+  padding-right:100px;
+  padding-bottom:100px;
+}
+
+#welcome1 .jumbotron{
+  border-radius:40px;
+  padding:40px;
+  max-width:900px;
+  margin:auto;
+  background-color:rgba(255,255,255,0.75);
+}
+
+.elec-label{
+  float:left;
+  margin-right:10px;
+}
+
+#welcome{
+  text-align:center;
+  padding:40px;
+  background:url(../../assets/img/SAC.jpg) no-repeat;
+  background-size:cover;
+  margin-top:60px;
+}
+
+.control1{
+  max-width:700px;
+}
+
+#col1{
+  max-width:360px;
+}
+
+#logo{
+  max-height:42px;
+  margin-top:-1px;
+  margin-right:10px;
+  display:inline-block;
+}
+
+@media (max-width:767px) {
+  #welcome{
+    padding:20px;
+  }
+}
+
+#icon1{
+  font-size:40px;
+}
+
+div#welcome .jumbotron{
+  border-radius:40px;
+  padding:40px;
+  max-width:900px;
+  margin:auto;
+  background-color:rgba(255,255,255,0.75);
+}
+
+@media (max-width:767px) {
+  div#welcome .jumbotron{
+    padding:20px;
+  }
+}
+
+div.container.site-sections{
+  text-align:center;
+  padding:60px 0 50px;
+}
+
+#candidates{
+  margin-top:70px;
+}
+
+@media (max-width:767px) {
+  .form-one{
+    width:330px;
+  }
+}
+
+.text3{
+  border-color:black;
+}
+
+@media (max-width:767px) {
+  .form-two{
+    padding:40px 40px;
+    margin:0 auto 25px;
+    max-width:1000px;
+    border-radius:2px;
+    font-size:x-large;
+    font:normal 28px raleway;
+    text-align:center;
+  }
+}
+
+.form-two{
+  padding:40px 40px;
+  margin:0 auto 25px;
+  max-width:800px;
+  border-radius:2px;
+  font-size:x-large;
+  font:normal 28px raleway;
+  text-align:center;
+}
+
+.date{
+  max-width:30%;
+}
+
+.form-2{
+  margin:0 auto 25px;
+  max-width:800px;
+  border-radius:2px;
+  font-size:x-large;
+  font:normal 28px raleway;
+  text-align:center;
+}
+
+.form-one{
+  padding:40px 40px;
+  margin:0 auto 25px;
+  max-width:360px;
+  text-align:center;
+  margin-top:100px;
+  background-color:#f96302;
+  box-shadow:0px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius:2px;
+}
+
+h1{
+  text-align:center;
+}
+
+div#intro p{
+  max-width:800px;
+  font-size:20px;
+  margin:auto;
+}
+
+#btnB{
+  text-align:center;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+
+#btnA{
+  margin-right:10px;
+  margin-left:10px;
+}
+
+@media (max-width:767px) {
+  .form-group{
+    text-align:center;
+  }
+}
+
+.form-control{
+  display:block;
+  border-radius:10px;
+  width:100%;
+  margin-bottom:20px;
+  font:initial;
+}
+
+#content.form-one{
+  padding-top:60px;
+}
+
+.site-sections h1{
+  font-weight:normal;
+}
+
+#header1{
+  margin-bottom:60px;
+  font-size:30px;
+}
+
+.info1{
+  max-width:360px;
+}
+
+@media (max-width:767px) {
+  #par3{
+    font-size:small;
+  }
+}
+
+#receipt{
+  text-align: center;
+}
+
+#col1{
+  max-width:400px;
+}
+
+@media (max-width:767px) {
+  #foot-head1{
+    text-align:center;
+    font-size:23px;
+  }
+}
+
+#lead1{
+  max-width:1300px;
+  margin:auto;
+  padding:2px;
+}
+
+@media (max-width:767px) {
+  #lead{
+    max-width:330px;
+    margin:auto;
+  }
+}
+
+.lead{
+  font:normal 26px raleway;
+  text-align:center;
+}
+
+.par2{
+  font:normal 20px raleway;
+  margin-bottom:50px;
+}
+
+.par{
+  font:normal 18px raleway;
+}
+
+.slide{
+  margin-top:50px;
+}
+
+.carousel-inner{
+  max-height:650px;
+}
+
+.candidates1{
+  color:rgb(51,51,51);
+  margin-left:10px;
+}
+
+#a1{
+  text-decoration:underline;
+}
+
+.candidates{
+  color:rgb(51,51,51);
+}
+
+#candidate1{
+  margin-top:30px;
+  border-color:transparent;
+}
+
+.reg-label{
+  font:normal 20px Raleway;
+  float:left;
+}
+
+.inputbar{
+  font:normal 15px Raleway;
+  border-color:#eaaf0f;
+}
+
+#details{
+  margin-bottom:50px;
+  font:normal 20px Raleway;
+}
+
+.col-md-2{
+  text-align:center;
+}
+
+#content1{
+  margin-left:20px;
+}
+
+.form-control:focus{
+  border-color:#eeaa25;
+  outline:0;
+  -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+  box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+}
+
+a{
+  color:#4582ec;
+  text-decoration:none;
+}
+
+#searchBtn{
+  margin-right:170px;
+}
+
+.buttonz{
+  text-align:center;
+}
+
+.elec-label{
+  float:initial;
+}
+
+.sidenav {
+    height: 100%;
+    width: 190px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
