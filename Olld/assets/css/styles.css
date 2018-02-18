@@ -24,11 +24,6 @@
   margin-top:100px;
 }
 
-#elecname{
-  width:400px;
-    
-}
-
 #carou{
   text-align:center;
   padding-left:100px;
@@ -367,9 +362,4 @@ a{
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
-}
-
-.elecgroup{
-    display: inline-block;
-    width: 50%;        
 }
