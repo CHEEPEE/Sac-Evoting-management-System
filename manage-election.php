@@ -1,8 +1,9 @@
 <?php
 include 'dbconnect.php';
-
+session_start();
 $election_id = $_REQUEST['electionid'];
 echo $election_id;
+$_SESSION['electionid'] = $election_id;
 include 'bootstrap.php';
 ?>
 <!DOCTYPE html>
@@ -75,19 +76,26 @@ $getPositionRequest = $conn->query($getPostions_sql);
  if ($getPositionRequest->num_rows > 0) {
      // output data of each row
      while($row = $getPositionRequest->fetch_assoc()) {
+        $position_id = $row['id'];
          ?>
+
          <div id="accordion">
            <div class="card">
              <div class="card-header" id="headingOne">
                <h5 class="mb-0">
-                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <?php echo "" . $row["position_name"]."  <a href='manage-election.php?electionid=".$row['id']."'> <i class='large material-icons'> edit</i> Edit Name</a><br>";
-                     $position_id = $row['id']; ?>
+                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $position_id;?>" aria-expanded="true" aria-controls="collapseOne">
+                  <?php echo "" . $row["position_name"]."";
+
+                      ?>
                  </button>
                </h5>
              </div>
 
-             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+             <div id="collapse<?php echo $position_id;?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+               <?php   echo "<a href='manage-election.php?electionid=".$row['id']."'> <i class='large material-icons'>edit</i>Edit Postition Name<br></a> ";
+                        echo "<a href='delete-postion.php?posid=".$row['id']."'> <i class='large material-icons'>delete</i>Delete Name<br></a> ";
+                ?>
                <div class="card-body">
                  <form class="" action="add-candidates.php?electionid=<?php echo $election_id;?>&posid=<?php echo $position_id; ?>" method="post">
                    <div class="form-2">
@@ -103,7 +111,6 @@ $getPositionRequest = $conn->query($getPostions_sql);
                            $partylist_result = $conn->query($party_list_sql);
                            if ($partylist_result->num_rows>0) {
                              # code...
-
                              while ($rowpartylist = $partylist_result->fetch_assoc()) {
                                $partylistid= $rowpartylist['party_list_id'];
                                $partylistvalue = $rowpartylist['party_list_name'];
@@ -131,9 +138,11 @@ $getPositionRequest = $conn->query($getPostions_sql);
          $getCandidatessql = "SELECT * FROM candidates WHERE election_id=$election_id AND position_id = $position_id";
          $getCandidateResult =$conn->query($getCandidatessql);
          if ($getCandidateResult->num_rows>0) {
+
            while ($rowcandidate = $getCandidateResult->fetch_assoc()) {
+             $candid = $rowcandidate['candidate_id'];
              # code...
-             echo $rowcandidate['candidate_name']."<br>";
+             echo $rowcandidate['candidate_name']." Edit <a href = 'delete-candidate.php?candid=$candid'>Delete</a><br>";
            }
            # code...
          }
@@ -150,7 +159,7 @@ $getPositionRequest = $conn->query($getPostions_sql);
    # code...
    while ($row = $partylist_result->fetch_assoc()) {
      # code...
-     //echo $row['party_list_name']."<br>";
+     echo $row['party_list_name']."<br>";
 
    }
  }else {
