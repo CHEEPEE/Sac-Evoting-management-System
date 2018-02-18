@@ -1,14 +1,10 @@
-<?php
-     include 'dbconnect.php';
-     include 'bootstrap.php';
-?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sac eVoting</title>
+    <title>Sac eVoting#3</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
@@ -28,7 +24,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Account </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="Landing.html">Logout </a></li>
+                            <li role="presentation"><a href="Landing.html">Manage Party List</a></li>
+                            <li role="presentation"><a href="Landing.html">Manage Candidates</a></li>
+                            <li role="presentation"><a href="Landing.html">Manage Electoral Position</a></li>
+                            <li role="presentation"><a href="Landing.html">View voting results</a></li>
+                            <li role="presentation"><a href="Landing.html">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -47,40 +47,21 @@
     </div>
     <div id="welcome1">
         <div class="jumbotron">
-            <form action="insert-election.php" method="post">
-            <div>
-                <label for="election_name">Election Name: </label>
-                <input type="text" required name="election_name" class="form-control" id="election_name" aria-describedby="emailHelp" placeholder="Election Name">
+          <form class="" action="insert-election.php" method="post">
+            <div class="form-2">
+                  <label for="election_name">Election Name</label>
+                  <input type="text" name="election_name" class="form-control" id="election_name" aria-describedby="emailHelp" placeholder="Election Name">
             </div>
-            <div>
-                <label>Start Date: </label>
-                <input type="date" required name="start_date">
+            <div class="form-2">
+                <label for="election-type"  class="elec-label">Start Date:</label>
+                <input class="input-sm" name="start_date" type="date">
             </div>
-            <div>
-                <label>End Date: </label>
-                <input type="date" required name="end_date">
+            <div class="form-2">
+                <label for="election-type" class="elec-label" >End Date:</label>
+                <input class="input-sm" name ="end_date" type="date">
             </div>
-            <button class="btn btn-default btn-sm" type="submit" >Button</button>
-            </form>
-               <div class="list-group">
-       <!-- Election Name -->
-       <?php
-       $evotingsql = "SELECT * FROM election ORDER BY id DESC";
-       $result = $conn->query($evotingsql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> ". $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>settings</i></a><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>delete</i></a></div></div></div>";
-                $election_id = $row['id'];
-                ?>
-                <?php
-            }
-        } else {
-            echo "0 results";
-        }
-       ?>
-           </div>
+            <input type="submit" class="btn btn-default" value="Next">
+          </form>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
