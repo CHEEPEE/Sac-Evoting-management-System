@@ -84,7 +84,6 @@ $getPositionRequest = $conn->query($getPostions_sql);
                <h5 class="mb-0">
                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $position_id;?>" aria-expanded="true" aria-controls="collapseOne">
                   <?php echo "" . $row["position_name"]."";
-
                       ?>
                  </button>
                </h5>
@@ -96,7 +95,7 @@ $getPositionRequest = $conn->query($getPostions_sql);
                         echo "<a href='delete-postion.php?posid=".$row['id']."'> <i class='large material-icons'>delete</i>Delete Name<br></a> ";
                 ?>
                <div class="card-body">
-                 <form class="" action="add-candidates.php?electionid=<?php echo $election_id;?>&posid=<?php echo $position_id; ?>" method="post">
+                 <form class="" action="add-candidates.php?electionid=<?php echo $election_id;?>&posid=<?php echo $position_id; ?>" method="post" enctype="multipart/form-data">
                    <div class="form-2">
                          <label for="candidate_name">Candidate Name</label>
                          <input type="text" required name="candidate_name" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Name">
@@ -104,6 +103,8 @@ $getPositionRequest = $conn->query($getPostions_sql);
                          <input type="text" required name="candidate_cource" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Course">
                          <label for="candidate_des">Description</label>
                          <input type="text" required name="candidate_des" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Candidate Description">
+                          <label for="fileToUpload">upload picture</label>
+                           <input type="file" name="fileToUpload" id="fileToUpload">
                          <select name="partylist">
                           <?php
                            $party_list_sql = "SELECT * FROM party_list WHERE election_id=$election_id";
@@ -139,7 +140,9 @@ $getPositionRequest = $conn->query($getPostions_sql);
 
            while ($rowcandidate = $getCandidateResult->fetch_assoc()) {
              $candid = $rowcandidate['candidate_id'];
-             # code...
+             $img = $rowcandidate['img_location'];
+              # code...
+             echo "<image src = '$img' width='100px' height = '100px'>";
              echo $rowcandidate['candidate_name']." <a href = 'edit-candidate-name.php?candid=$candid'>Edit</a> <a href = 'delete-candidate.php?candid=$candid'>Delete</a><br>";
            }
            # code...
