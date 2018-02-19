@@ -78,7 +78,6 @@ $getPositionRequest = $conn->query($getPostions_sql);
      while($row = $getPositionRequest->fetch_assoc()) {
         $position_id = $row['id'];
          ?>
-
          <div id="accordion">
            <div class="card">
              <div class="card-header" id="headingOne">
@@ -93,7 +92,7 @@ $getPositionRequest = $conn->query($getPostions_sql);
 
 
              <div id="collapse<?php echo $position_id;?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-               <?php   echo "<a href='manage-election.php?electionid=".$row['id']."'> <i class='large material-icons'>edit</i>Edit Postition Name<br></a> ";
+               <?php   echo "<a href='edit-position-name.php?posid=".$row['id']."'> <i class='large material-icons'>edit</i>Edit Postition Name<br></a> ";
                         echo "<a href='delete-postion.php?posid=".$row['id']."'> <i class='large material-icons'>delete</i>Delete Name<br></a> ";
                 ?>
                <div class="card-body">
@@ -120,7 +119,6 @@ $getPositionRequest = $conn->query($getPostions_sql);
                            }else {
                               echo "0 results";
                            }
-
                            ?>
 
                          </select>
@@ -142,7 +140,7 @@ $getPositionRequest = $conn->query($getPostions_sql);
            while ($rowcandidate = $getCandidateResult->fetch_assoc()) {
              $candid = $rowcandidate['candidate_id'];
              # code...
-             echo $rowcandidate['candidate_name']." Edit <a href = 'delete-candidate.php?candid=$candid'>Delete</a><br>";
+             echo $rowcandidate['candidate_name']." <a href = 'edit-candidate-name.php?candid=$candid'>Edit</a> <a href = 'delete-candidate.php?candid=$candid'>Delete</a><br>";
            }
            # code...
          }
@@ -159,14 +157,12 @@ $getPositionRequest = $conn->query($getPostions_sql);
    # code...
    while ($row = $partylist_result->fetch_assoc()) {
      # code...
-     echo $row['party_list_name']."<br>";
-
+     $partid = $row['party_list_id'];
+     echo $row['party_list_name']."<a href = 'edit-party-list.php?partid=$partid'>Edit</a> <a href = 'delete-party-list.php?partid=$partid'>delete</a><br>";
    }
  }else {
     echo "0 results";
  }
-
-
  ?>
 
 
