@@ -71,7 +71,7 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> ". $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>settings</i></a><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>delete</i></a></div></div></div>";
+                echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> ". $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>settings</i></a><a href = 'delete-evoting.php?electionid=".$row['id']."' ><i class='large material-icons'>delete</i></a></div></div></div>";
                 $election_id = $row['id'];
                 ?>
                 <?php
