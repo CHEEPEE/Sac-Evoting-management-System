@@ -24,22 +24,22 @@
         </div>
     </nav>
     <div class="form-one">
-        <form class="form-horizontal custom-form">
+        <form class="form-horizontal custom-form" action="c.php">
             <h1 id="header1">Student Registration</h1>
-            <label class="reg-label">Student ID :</label>
-            <input class="form-control inputbar" type="text" placeholder="Enter Student ID">
+            <label class="reg-label" >Student ID :</label>
+            <input name="student-id" name ="student-id" class="form-control inputbar" type="text" placeholder="Enter Student ID">
             <label class="reg-label">Password: </label>
-            <input class="form-control inputbar" type="password" required="" placeholder="Enter Password">
+            <input name="password"  name="password"class="form-control inputbar" type="password" required="" placeholder="Enter Password">
             <label class="reg-label">Academic Level:</label>
-            <select class="form-control inputbar">
+            <select name="academic_level" class="form-control inputbar">
                 <optgroup label="Please select your Academic Level:">
                     <option value="">Highschool</option>
                     <option value="">Senior Highschool</option>
                     <option value="">College</option>
                 </optgroup>
             </select>
-            <label class="reg-label">Year Level:</label>
-            <select class="form-control inputbar">
+            <label  class="reg-label">Year Level:</label>
+            <select name="year_level" class="form-control inputbar">
                 <optgroup label="Please select your Year Level">
                     <option value="1" selected="">1</option>
                     <option value="2">2</option>
@@ -47,8 +47,8 @@
                     <option value="">4</option>
                 </optgroup>
             </select>
-            <label class="reg-label">Section:</label>
-            <select class="form-control inputbar">
+            <label  class="reg-label">Section:</label>
+            <select name="section" class="form-control inputbar">
                 <optgroup label="Please select your Section">
                     <option value="12" selected="">St. Martha</option>
                     <option value="13">This is item 2</option>
