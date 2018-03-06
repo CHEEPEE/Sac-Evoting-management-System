@@ -28,7 +28,7 @@
                             <li role="presentation"><a href="Landing.html">Manage Candidates</a></li>
                             <li role="presentation"><a href="Landing.html">Manage Electoral Position</a></li>
                             <li role="presentation"><a href="Landing.html">View voting results</a></li>
-                            <li role="presentation"><a href="Landing.html">Logout</a></li>
+                            <li role="presentation"><a href="Landing.html">Logout </a></li>
                         </ul>
                     </li>
                 </ul>
@@ -40,28 +40,29 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <form class="form-horizontal custom-form">
-                        <h1>Manage Election</h1></form>
+                        <h1>Create Election</h1></form>
                 </div>
             </div>
         </div>
     </div>
     <div id="welcome1">
         <div class="jumbotron">
-          <form class="" action="insert-election.php" method="post">
             <div class="form-2">
-                  <label for="election_name">Election Name</label>
-                  <input type="text" name="election_name" class="form-control" id="election_name" aria-describedby="emailHelp" placeholder="Election Name">
+                <label for="election-type" class="elec-label">Election Type:</label>
+                <select class="input-sm" name="election-type">
+                    <option value="SR">Student Republic</option>
+                    <option value="HR">Homeroom</option>
+                </select>
             </div>
             <div class="form-2">
-                <label for="election-type"  class="elec-label">Start Date:</label>
-                <input class="input-sm" name="start_date" type="date">
+                <label for="election-type" class="elec-label">Start Date:</label>
+                <input class="input-sm" type="datetime-local">
             </div>
             <div class="form-2">
-                <label for="election-type" class="elec-label" >End Date:</label>
-                <input class="input-sm" name ="end_date" type="date">
+                <label for="election-type" class="elec-label">End Date:</label>
+                <input class="input-sm" type="datetime-local">
             </div>
-            <input type="submit" class="btn btn-default" value="Next">
-          </form>
+            <button class="btn btn-default" type="button">Set Date</button>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>

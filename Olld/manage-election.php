@@ -3,48 +3,92 @@ include 'dbconnect.php';
 
 $election_id = $_REQUEST['electionid'];
 echo $election_id;
-include 'bootstrap.php';
+//include 'bootstrap.php';
 ?>
-<div class="row justify-content-md-center">
-  <div class="col-4">
+<!DOCTYPE html>
 
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sac eVoting</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-<form class="" action="add-positions.php?electionid=<?php echo $election_id;?>" method="post">
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand navbar-link" href="landing.html"><img src="assets/img/Saclogo1.png" id="logo">SAC eVoting</a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Account </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a href="Landing.html">Logout </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="content" class="form-1">
+        <div class="container-fluid" id="candidates">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <form class="form-horizontal custom-form">
+                        <h1>Manage Election</h1></form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="welcome1">
+        <div class="jumbotron">
+            <div>
+          <form class="" action="add-positions.php?electionid=<?php echo $election_id;?>" method="post">
   <div class="form-2">
-        <label for="position_name">Position</label><br>
-        <input type="text" required name="position_name" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Postion">
+        <label for="position_name">Position</label>
+        <input type="text" required name="position_name" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Postion" >
   </div>
   <input type="submit" class="btn btn-default" value="Add">
 </form>
-<form class="" action="add-partylist.php?electionid=<?php echo $election_id;?>" method="post">
+            </div>
+            <div>
+    <form class="" action="add-partylist.php?electionid=<?php echo $election_id;?>" method="post">
   <div class="form-2">
         <label for="party_list_name">Add Party-List</label><br>
-        <input type="text" required name="party_list_name" class="form-control" id="party_list_name" aria-describedby="emailHelp" placeholder="Postion">
+        <input type="text" required name="party_list_name" class="form-control" id="party_list_name" aria-describedby="emailHelp" placeholder="Party List">
   </div>
   <input type="submit" class="btn btn-default" value="Add">
 </form>
-
-<?php
-$getPostions_sql = "SELECT * FROM election_positions wHERE election_id = $election_id";
+            </div>
+            <?php
+$getPostions_sql = "SELECT * FROM election_positions WHERE election_id = $election_id";
 $getPositionRequest = $conn->query($getPostions_sql);
 
  if ($getPositionRequest->num_rows > 0) {
      // output data of each row
      while($row = $getPositionRequest->fetch_assoc()) {
          ?>
-         <div id="accordion">
+         <div id="accordion-1" class="panel-group" aria-multiselectable="true" role="tablist">
            <div class="card">
              <div class="card-header" id="headingOne">
                <h5 class="mb-0">
                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <?php echo "" . $row["position_name"]." <a href='manage-election.php?electionid=".$row['id']."'><i class='large material-icons'>edit</i>Edit Name</a><br>";
+                  <?php echo "" . $row["position_name"]."  <a href='manage-election.php?electionid=".$row['id']."'> <i class='large material-icons'> edit</i> Edit Name</a><br>";
                      $position_id = $row['id']; ?>
                  </button>
                </h5>
              </div>
 
-             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-1">
                <div class="card-body">
                  <form class="" action="add-candidates.php?electionid=<?php echo $election_id;?>&posid=<?php echo $position_id; ?>" method="post">
                    <div class="form-2">
@@ -107,7 +151,7 @@ $getPositionRequest = $conn->query($getPostions_sql);
    # code...
    while ($row = $partylist_result->fetch_assoc()) {
      # code...
-     echo $row['party_list_name']."<br>";
+     //echo $row['party_list_name']."<br>";
 
    }
  }else {
@@ -119,53 +163,19 @@ $getPositionRequest = $conn->query($getPostions_sql);
 
 
    </div>
+  
+</div>
   </div>
-  <!--
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Collapsible Group Item #1
-          </button>
-        </h5>
-      </div>
 
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
-      </div>
-    </div>
-   <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div> -->
 </div>
   <script type="text/javascript">
 $('.collapse').collapse();
   </script>
+
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

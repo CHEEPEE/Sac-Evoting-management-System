@@ -1,3 +1,8 @@
+<?php
+include 'dbconnect.php';
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -31,12 +36,6 @@
             </div>
         </div>
     </nav>
-    <div class="sidenav">
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#clients">Clients</a>
-  <a href="#contact">Contact</a>
-</div>
     <div id="content" class="form-1">
         <div class="container-fluid" id="candidates">
             <div class="row">
@@ -52,7 +51,7 @@
             <div class="jumbotron" id="jumb1">
                 <div class="form-two">
                     <div class="container control1"><a href="ManageStudents.html" class="candidates">Manage Students</a></div>
-                    <div class="container control1"><a href="ManageElection.html" class="candidates">Manage Election</a></div>
+                    <div class="container control1"><a href="manage-evoting.php" class="candidates">Manage Election</a></div>
                     <div class="container control1"><a href="#" class="candidates">Manage Party List</a></div>
                     <div class="container control1"><a href="#" class="candidates">Manage Candidates</a></div>
                     <div class="container control1"><a href="ElectionResults.html" class="candidates">View election results</a></div>
