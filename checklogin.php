@@ -14,7 +14,7 @@ if ($loginresult->num_rows>0) {
     $users_role = $user_row['role'];
     if ($users_role == "admin") {
       # code...
-      header("location:admincontent.php");
+      header("location:admin-dashboard.php");
     }
   }
 }else {
