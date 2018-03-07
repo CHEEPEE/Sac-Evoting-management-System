@@ -20,6 +20,10 @@
 
 
   <body>
+  <?php include 'dbconnect.php';
+        include 'department-management.php';
+  ?>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Navbar content -->
     <a class="navbar-brand" href="#">E-Voting</a>
@@ -44,21 +48,63 @@
     <div class="row">
       <div class="col-2">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Manage Partylist</a>
-          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Manage Candidate</a>
+          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Manage Election</a>
           <a class="nav-link" id="v-pills-manage-student-tab" data-toggle="pill" href="#v-pills-manage-student" role="tab" aria-controls="v-pills-manage-student" aria-selected="false">Manage Students</a>
           <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Electoral Position</a>
           <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Manage Voting Results</a>
+          <a class="nav-link" id="v-pills-year-course-tab" data-toggle="pill" href="#v-pills-year-course" role="tab" aria-controls="v-pills-year-course" aria-selected="false">Manage Year & Course</a>
         </div>
 
 
       </div>
       <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-manage-student" role="tabpanel" aria-labelledby="v-pills-manage-student-tab">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <!-- Manage Election -->
+            <div class="container">
+              <div class="row">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Election</button>
+              </div>
+            </div>
 
+
+            <div class="container">
+              <div class="row">
+                <?php
+                $evotingsql = "SELECT * FROM election ORDER BY id DESC";
+                $result = $conn->query($evotingsql);
+
+                 if ($result->num_rows > 0) {
+                     // output data of each row
+                     while($row = $result->fetch_assoc()) {
+                         echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> ". $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'><a href = 'manage-election.php?electionid=".$row['id']."' ><i class='large material-icons'>settings</i></a><a href = 'delete-evoting.php?electionid=".$row['id']."' ><i class='large material-icons'>delete</i></a></div></div></div>";
+                         $election_id = $row['id'];
+                         ?>
+                         <?php
+                     }
+                 } else {
+                     echo "0 results";
+                 }
+                ?>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-manage-student" role="tabpanel" aria-labelledby="v-pills-manage-student-tab">
+            <!-- Manage student Page -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Register A Student</button>
+            <div class="row mt-3">
+              <?php
+                $courselistSql = "SELECT * FROM college_student";
+                $courseListResult = $conn->query($courselistSql);
+                if ($courseListResult->num_rows>0) {
+                  # code...
+                  while ($getCourseRow = $courseListResult->fetch_assoc()) {
+                    ?> <?php echo $getCourseRow['fullname']; ?> <?php
+                    # code...
+                  }
+                }
+              ?>
+            </div>
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
@@ -70,35 +116,185 @@
                     </div>
                     <div class="row">
                       <div class="col-8">
-                        <form class="" action="register-student.php" method="post">
+                        <form class="" action="admin-dashboard.php" method="post">
                           <div class="form-group">
                             <label for="exampleInputEmail1">Student Number</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number">
+                            <input type="text" name="student-number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number">
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail1">Student Full Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name">
+                            <input type="text" name="full-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name">
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail1">User Name</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+                          <div class="row">
+                            <div class="col-6">
+                              <select required name="course" class="form-control form-control-sm mb-3">
+                                <option></option>
+                                <?php
+                                  $courselistSql = "SELECT * FROM course";
+                                  $courseListResult = $conn->query($courselistSql);
+                                  if ($courseListResult->num_rows>0) {
+                                    # code...
+                                    while ($getCourseRow = $courseListResult->fetch_assoc()) {
+                                      ?> <option value="<?php echo $getCourseRow['course_id']; ?>"> <?php echo $getCourseRow['course_name']; ?> </option><?php
+                                      # code...
+                                    }
+                                  }
+                                ?>
+                              </select>
+                            </div>
+                            <div class="col-4">
+                              <select required name="year_level" class="form-control form-control-sm mb-3">
+                                <option></option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                                <option value="5">5th Year</option>
+                              </select>
+                            </div>
                           </div>
-                          <input class="btn btn-primary" type="submit" name="" value="Submit">
+
+
+
+                          </div>
+
+                          <input class="btn btn-primary" type="submit" name="register-student" value="Submit">
+
                         </form>
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
+            <!-- End Manage Student Page -->
           </div>
           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
-
           </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-year-course" role="tabpanel" aria-labelledby="v-pills-year-course-tab">
+            <div class="container">
+              &nbsp;Year Course
+              <div class="row ml-1 mb-3 mt-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".add-department">Add Department</button>
+              </div>
+              <div class="row">
+                <div class="col-10">
+                  <!-- deparment List Accordion -->
+                  <?php
+                  $getDepartmentSql = "SELECT * FROM department";
+                  $getDepartmentSqlresult = $conn->query($getDepartmentSql);
+
+                  if ($getDepartmentSqlresult->num_rows > 0) {
+                      // output data of each row
+                      while($row = $getDepartmentSqlresult->fetch_assoc()) {
+
+                   ?>
+                  <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne<?php echo $row['department_id'];?>" aria-expanded="false" aria-controls="collapseOne<?php echo $row['department_id'];?>">
+                          <?php echo $row['department_name']; ?>
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapseOne<?php echo $row['department_id'];?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                          <button type="button" class="btn btn-primary mt-1 mb-1" data-toggle="modal" data-target=".add-course<?php echo $row['department_id'];?>">Add Course</button>
+                          <div class="modal fade add-course<?php echo $row['department_id'];?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-md modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="container mr-3 mt-3 mb-3 ml-3">
+                                  <div class="row">
+                                    <div class="col-11">
+                                      <form class="" action="admin-dashboard.php?depid=<?php echo $row['department_id'];?>" method="post">
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Course Name</label>
+                                          <input type="text" name="course-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number">
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" name="insert-course" value="Submit">
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <ul class="list-group list-group-flush">
+
+
+                          <?php
+                            $courselistSql = "SELECT * FROM course WHERE department_id = '".$row['department_id']."'";
+                            $courseListResult = $conn->query($courselistSql);
+                            if ($courseListResult->num_rows>0) {
+                              # code...
+                              while ($getCourseRow = $courseListResult->fetch_assoc()) {
+                                ?> <li class="list-group-item"><?php echo $getCourseRow['course_name']; ?></li> <?php
+                                # code...
+                              }
+                            }
+                          ?>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <?php
+                    }
+                  } else {
+                      echo "0 results";
+                  }
+
+                  ?>
+                  <!-- End Department-list Accordion -->
+                </div>
+              </div>
+              <div class="modal fade add-department" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="container mr-3 mt-3 mb-3 ml-3">
+                      <div class="row">
+                        <div class="col-11">
+                          <form class="" action="admin-dashboard.php?" method="post">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Department Name</label>
+                              <input type="text" name="department-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number">
+                            </div>
+                            <input class="btn btn-primary" type="submit" name="add-department" value="Submit">
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade add-course" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="container mr-3 mt-3 mb-3 ml-3">
+                      <div class="row">
+                        <div class="col-11">
+                          <form class="" action="admin-dashboard.php" method="post">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Course Name</label>
+                              <input type="text" name="course-name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number">
+                            </div>
+                            <input class="btn btn-primary" type="submit" name="insert-course" value="Submit">
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

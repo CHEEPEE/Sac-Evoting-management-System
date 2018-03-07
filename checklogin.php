@@ -15,6 +15,9 @@ if ($loginresult->num_rows>0) {
     if ($users_role == "admin") {
       # code...
       header("location:admin-dashboard.php");
+    }else if($users_role == "student") {
+      header("location:student.php");
+      # code...
     }
   }
 }else {
