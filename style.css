@@ -1,0 +1,21 @@
+body{
+	margin: 0 auto;
+}
+.row{
+	margin: 0 auto;
+	margin-left: 0 auto;
+	left: auto;
+	right: auto;
+}
+.col{
+	
+}
+.col .s1{
+	float: left;
+}
+.s1{
+	width: 10%
+	margin:0 auto;
+	left: auto;
+	right: auto;
+}
