@@ -58,7 +58,10 @@ function getDepartmentIdUsingCourse($courseId){
       # code...
     }
   }
+}
 
+if (isset($_POST['manage-election'])) {
+  # code...
 }
 
  ?>

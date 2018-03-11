@@ -24,6 +24,4 @@ if ($loginresult->num_rows>0) {
   echo "Failed";
 }
 
-
-
 ?>
