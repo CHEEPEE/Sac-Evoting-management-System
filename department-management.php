@@ -1,4 +1,38 @@
 <?php
+if (isset($_REQUEST['eid'])) {
+  # code...
+$eid = $_REQUEST['eid'];
+
+  if (isset($_POST['add-position'])) {
+    # code...
+    include 'dbconnect.php';
+    $position_name = $_POST['position_name'];
+
+    $position_insert_sql = "INSERT INTO election_positions (position_name,election_id) VALUES ('$position_name',$eid)";
+    if ($conn->query($position_insert_sql) === TRUE) {
+      # code...
+      header("location:admin-dashboard.php?eid=$eid");
+    }
+  }
+  if (isset($_POST['add-party-list'])) {
+    # code...
+
+    include 'dbconnect.php';
+    $partylistname = $_POST['party_list_name'];
+    $insertPartyListSql = "INSERT INTO party_list (party_list_name,election_id) VALUES ('$partylistname',$eid);";
+    if ($conn->query($insertPartyListSql)===TRUE) {
+      # code...
+  header("location:admin-dashboard.php?eid=$eid");
+    }else {
+      # code...
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+  }
+
+
+}
+
 
 if (isset($_POST['add-department'])) {
   # code...
@@ -62,6 +96,34 @@ function getDepartmentIdUsingCourse($courseId){
 
 if (isset($_POST['manage-election'])) {
   # code...
+}
+
+if (isset($_POST["add-election"])) {
+  # code...
+  include 'dbconnect.php';
+
+  $election_name= $_POST['election_name'];
+  $start_date = $_POST['start_date'];
+  $end_date = $_POST['end_date'];
+  echo $election_name.$start_date.$end_date;
+  $sql = "INSERT INTO election (election_name,date_start,date_end) VALUES ('$election_name','$start_date','$end_date')";
+  if ($conn->query($sql)=== TRUE) {
+    # code...
+  header("location:admin-dashboard.php");
+  }else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
+if (isset($_POST['add-position'])) {
+  # code...
+  include 'dbconnect.php';
+  $position_name = $_POST['position_name'];
+
+  $position_insert_sql = "INSERT INTO election_positions (position_name,election_id) VALUES ('$position_name',$election_id)";
+  if ($conn->query($position_insert_sql) === TRUE) {
+    # code...
+    header("location:admin-dashboard.php");
+  }
 }
 
  ?>

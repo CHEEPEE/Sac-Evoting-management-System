@@ -83,7 +83,10 @@
                  if ($result->num_rows > 0) {
                      // output data of each row
                      while($row = $result->fetch_assoc()) {
-                         echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> ". $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'><a href = 'admin-dashboard.php?eid=".$row['id']."' ><i class='icon ion-gear-a'></i></a><a href = 'delete-evoting.php?electionid=".$row['id']."' ><i class='ml-3 icon ion-close-circled'></i></a></div></div></div>";
+                         echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> "
+                         . $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'>
+                         <a href = 'admin-dashboard.php?eid=".$row['id']."' ><i class='icon ion-gear-a'></i></a><a href =
+                         'delete-evoting.php?electionid=".$row['id']."' ><i class='ml-3 icon ion-close-circled'></i></a></div></div></div>";
                          $election_id = $row['id'];
                          ?>
 
@@ -166,9 +169,6 @@
                               </select>
                             </div>
                           </div>
-
-
-
                           </div>
 
                           <input class="btn btn-primary" type="submit" name="register-student" value="Submit">
@@ -310,19 +310,23 @@
 
         </div>
       </div>
+      <!-- Manage Election -->
       <div class="col-5">
-        <div class="row mb-3">
-          <div class="col-3">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Position</button>
-          </div>
-          <div class="col-3">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Party-List</button>
-          </div>
-        </div>
-        <div class="row">
-           <?php
 
+           <?php
            if (isset($_REQUEST['eid'])) {
+             ?>
+
+             <div class="row mb-3">
+               <div class="col-3">
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-position-modal-lg">Add Position</button>
+               </div>
+               <div class="col-3">
+                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-party-list-modal-lg">Add Party-List</button>
+               </div>
+             </div>
+             <div class="row">
+             <?php
              # code...
              $election_id = $_REQUEST['eid'];
 
@@ -334,8 +338,8 @@
                 while($row = $getPositionRequest->fetch_assoc()) {
                    $position_id = $row['id'];
                     ?>
-                    <div id="accordion">
-                      <div class="card">
+                    <div id="accordion" class="col-12">
+                      <div class="card  col-12">
                         <div class="card-header" id="headingOne">
                           <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $position_id;?>" aria-expanded="true" aria-controls="collapseOne">
@@ -345,45 +349,16 @@
                           </h5>
                         </div>
 
-
                         <div id="collapse<?php echo $position_id;?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+                          <div class="col-8">
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-candidate-modal-lg">Add Candidate</button>
+                          </div>
                           <?php   echo "<a href='edit-position-name.php?posid=".$row['id']."'> <i class='large material-icons'>edit</i>Edit Postition Name<br></a> ";
                                    echo "<a href='delete-postion.php?posid=".$row['id']."'> <i class='large material-icons'>delete</i>Delete Name<br></a> ";
                            ?>
-                          <div class="card-body">
-                            <form class="" action="add-candidates.php?electionid=<?php echo $election_id;?>&posid=<?php echo $position_id; ?>" method="post" enctype="multipart/form-data">
-                              <div class="form-2">
-                                    <label for="candidate_name">Candidate Name</label>
-                                    <input type="text" required name="candidate_name" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Name">
-                                    <label for="candidate_cource">Course</label>
-                                    <input type="text" required name="candidate_cource" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Course">
-                                    <label for="candidate_des">Description</label>
-                                    <input type="text" required name="candidate_des" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Candidate Description">
-                                     <label for="fileToUpload">upload picture</label>
-                                      <input type="file" name="fileToUpload" id="fileToUpload">
-                                    <select name="partylist">
-                                     <?php
-                                      $party_list_sql = "SELECT * FROM party_list WHERE election_id=$election_id";
-                                      $partylist_result = $conn->query($party_list_sql);
-                                      if ($partylist_result->num_rows>0) {
-                                        # code...
-                                        while ($rowpartylist = $partylist_result->fetch_assoc()) {
-                                          $partylistid= $rowpartylist['party_list_id'];
-                                          $partylistvalue = $rowpartylist['party_list_name'];
-                                          # code...
-                                         echo "<option value ='$partylistid'>$partylistvalue</option>";
-                                        }
-                                      }else {
-                                         echo "0 results";
-                                      }
-                                      ?>
+                          <div class="card-body col-12">
 
-                                    </select>
-
-
-                              </div>
-                              <input type="submit" class="btn btn-default" value="Add Candidate">
-                            </form>
                           </div>
                        </div>
                       </div>
@@ -430,7 +405,7 @@
 
         </div>
       </div>
-
+      <!-- End Manage Election -->
     </div>
   </div>
   <?php include 'modals.php'; ?>
