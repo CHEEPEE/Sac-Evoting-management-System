@@ -91,6 +91,7 @@ if (isset($_REQUEST['eid'])) {
   </div>
 </div>
 
+<!--add candidate modal-->
 <div class="modal fade" id="bd-add-candidate-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -130,7 +131,7 @@ if (isset($_REQUEST['eid'])) {
                   </select>
             </div>
           <div class="modal-footer">
-                <button class="btn btn-default btn-sm" name="add-party-list" type="submit">Save</button>
+                <button class="btn btn-default btn-sm" name="add-candidate" type="submit">Save</button>
           </div>
         </form>
       </div>

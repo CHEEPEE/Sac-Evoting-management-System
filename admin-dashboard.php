@@ -25,6 +25,8 @@
   <body>
   <?php include 'dbconnect.php';
         include 'department-management.php';
+        include 'fuctions.php';
+
   ?>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -82,12 +84,15 @@
 
                  if ($result->num_rows > 0) {
                      // output data of each row
+
                      while($row = $result->fetch_assoc()) {
-                         echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-10'> "
-                         . $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-2'>
+                       $election_id = $row['id'];
+                       echo getAccessCodeFromElectionId($election_id);
+                         echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-9'> "
+                         . $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "</div><div class='col-3'>
                          <a href = 'admin-dashboard.php?eid=".$row['id']."' ><i class='icon ion-gear-a'></i></a><a href =
                          'delete-evoting.php?electionid=".$row['id']."' ><i class='ml-3 icon ion-close-circled'></i></a></div></div></div>";
-                         $election_id = $row['id'];
+
                          ?>
 
 
@@ -324,6 +329,7 @@
                <div class="col-3">
                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-party-list-modal-lg">Add Party-List</button>
                </div>
+
              </div>
              <div class="row">
              <?php
@@ -337,6 +343,8 @@
                 // output data of each row
                 while($row = $getPositionRequest->fetch_assoc()) {
                    $position_id = $row['id'];
+
+                    echo " <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#bd-add-party-list-modal-lg'>$accesscode</button>";
                     ?>
                     <div id="accordion" class="col-12">
                       <div class="card  col-12">
@@ -408,6 +416,8 @@
       <!-- End Manage Election -->
     </div>
   </div>
+</div>
+
   <?php include 'modals.php'; ?>
 
 
@@ -417,5 +427,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   </body>
 </html>
