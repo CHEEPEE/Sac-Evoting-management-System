@@ -2,6 +2,7 @@
 
 include 'dbconnect.php';
 
+session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -15,13 +16,27 @@ if ($loginresult->num_rows>0) {
     if ($users_role == "admin") {
       # code...
       header("location:admin-dashboard.php");
-    }else if($users_role == "student") {
-      header("location:student.php");
+    }else {
       # code...
+
+
     }
   }
 }else {
-  echo "Failed";
+  $getStudent  ="SELECT * FROM college_student where student_num ='$username' AND password = '$password'";
+  $getStudentResult = $conn->query($getStudent);
+  if ($getStudentResult->num_rows>0) {
+    # code...
+    while ($student_user_row = $getStudentResult ->fetch_assoc()) {
+      # code...
+      $_SESSION['user_id'] = $student_user_row['student_num'];
+      $_SESSION['user_name'] = $student_user_row['fullname'];
+      header("location:student.php");
+
+    }
+  }else {
+  echo "Login Failed";
+  };
 }
 
 ?>

@@ -92,7 +92,7 @@ if (isset($_REQUEST['eid'])) {
 </div>
 
 <!--add candidate modal-->
-<div class="modal fade" id="bd-add-candidate-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="bd-add-candidate-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -102,9 +102,9 @@ if (isset($_REQUEST['eid'])) {
         </button>
       </div>
         <div class="modal-body">
-          <form action="admin-dashboard.php?eid=<?php echo $e_id;?>" method="post">
+          <form action="admin-dashboard.php?eid=<?php echo $e_id;?>&posid=<?php echo $position_id;?>" method="post" enctype="multipart/form-data">
             <div class="form-2">
-                  <label for="candidate_name">Candidate Name</label>
+                  <label for="candidate_name">Candidate Name <?php echo $position_id;?></label>
                   <input type="text" required name="candidate_name" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Name">
                   <label for="candidate_cource">Course</label>
                   <input type="text" required name="candidate_cource" class="form-control" id="position_name" aria-describedby="emailHelp" placeholder="Course">
@@ -137,7 +137,7 @@ if (isset($_REQUEST['eid'])) {
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

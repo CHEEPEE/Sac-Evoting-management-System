@@ -29,17 +29,14 @@ $eid = $_REQUEST['eid'];
     }
 
   }
-    
-  if(isset($_REQUES['posid'])){
-      
-      
-      
-  
+
+
+
   if (isset($_POST['add-candidate'])) {
     # code...
 
         include 'dbconnect.php';
-        $election_id = $_REQUEST['electionid'];
+        $election_id = $_REQUEST['eid'];
         $position_id = $_REQUEST['posid'];
 
         $candidatename = $_POST['candidate_name'];
@@ -93,18 +90,17 @@ $eid = $_REQUEST['eid'];
         $insertSQL = "INSERT INTO candidates (candidate_name,candidate_course,candidate_party_list_id,candidate_des,election_id,position_id,img_location) VALUES('$candidatename','$candidateCourse','$party_list_id','$candidatedes',$election_id,$position_id,'$target_file')";
         if ($conn->query($insertSQL)===TRUE) {
 
-        header("location:manage-election.php?electionid=$election_id");
+        header("location:admin-dashboard.php?eid=$election_id");
           # code...
         }else {
           # code...
           echo "Error: "."<br>" . $conn->error;
         }
-  }
 
 }
-    
-    
-    
+
+
+
 
 
 }
@@ -181,7 +177,9 @@ if (isset($_POST["add-election"])) {
   $election_name= $_POST['election_name'];
   $start_date = $_POST['start_date'];
   $end_date = $_POST['end_date'];
+  date_default_timezone_set("America/New_York");
   $access_code = date('Ymdhis');
+
   echo $election_name.$start_date.$end_date;
   $sql = "INSERT INTO election (election_name,date_start,date_end,election_access_code) VALUES ('$election_name','$start_date','$end_date',$access_code)";
   if ($conn->query($sql)=== TRUE) {
