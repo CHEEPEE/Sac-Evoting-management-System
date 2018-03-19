@@ -8,6 +8,7 @@ $eid = $_REQUEST['eid'];
     include 'dbconnect.php';
     $position_name = $_POST['position_name'];
 
+
     $position_insert_sql = "INSERT INTO election_positions (position_name,election_id) VALUES ('$position_name',$eid)";
     if ($conn->query($position_insert_sql) === TRUE) {
       # code...
@@ -40,6 +41,10 @@ $eid = $_REQUEST['eid'];
         $position_id = $_REQUEST['posid'];
 
         $candidatename = $_POST['candidate_name'];
+        $fname = $_POST['fname'];
+        $mname = $_POST['mname'];
+        $lname = $_POST['lname'];
+
         $candidateCourse = $_POST['candidate_cource'];
         $candidatedes = $_POST['candidate_des'];
         $party_list_id = $_POST['partylist'];
@@ -87,7 +92,7 @@ $eid = $_REQUEST['eid'];
             }
         }
 
-        $insertSQL = "INSERT INTO candidates (candidate_name,candidate_course,candidate_party_list_id,candidate_des,election_id,position_id,img_location) VALUES('$candidatename','$candidateCourse','$party_list_id','$candidatedes',$election_id,$position_id,'$target_file')";
+        $insertSQL = "INSERT INTO candidates (candidate_fname,candidate_mname,candidate_lname,candidate_course,candidate_party_list_id,candidate_des,election_id,position_id,img_location) VALUES('$fname','$mname','$lname','$candidateCourse','$party_list_id','$candidatedes',$election_id,$position_id,'$target_file')";
         if ($conn->query($insertSQL)===TRUE) {
 
         header("location:admin-dashboard.php?eid=$election_id");
