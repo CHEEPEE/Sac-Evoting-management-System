@@ -149,10 +149,10 @@ if (isset($_POST['register-student'])) {
   $insertStudent = "INSERT INTO college_student (student_num,fullname,password,course_id,department_id,year_level) VALUE('$student_number','$fullname','$student_number',$course,$year_level,$department_id)";
   if ($conn->query($insertStudent) ===TRUE) {
     # code...
-    $insertIntoUsers = "INSERT INTO users (username,password,role) VALUES ('$student_number','$student_number','student')";
-    if ($conn->query($insertIntoUsers)) {
-      # code...
-    }
+    // $insertIntoUsers = "INSERT INTO users (username,password,role) VALUES ('$student_number','$student_number','student')";
+    // if ($conn->query($insertIntoUsers)) {
+    //   # code...
+    // }
   }
 
 }
