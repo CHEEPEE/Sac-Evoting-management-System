@@ -40,7 +40,6 @@ $eid = $_REQUEST['eid'];
         $election_id = $_REQUEST['eid'];
         $position_id = $_REQUEST['posid'];
 
-        $candidatename = $_POST['candidate_name'];
         $fname = $_POST['fname'];
         $mname = $_POST['mname'];
         $lname = $_POST['lname'];
@@ -65,10 +64,6 @@ $eid = $_REQUEST['eid'];
             }
         }
         // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 500000) {
             echo "Sorry, your file is too large.";
@@ -94,8 +89,15 @@ $eid = $_REQUEST['eid'];
 
         $insertSQL = "INSERT INTO candidates (candidate_fname,candidate_mname,candidate_lname,candidate_course,candidate_party_list_id,candidate_des,election_id,position_id,img_location) VALUES('$fname','$mname','$lname','$candidateCourse','$party_list_id','$candidatedes',$election_id,$position_id,'$target_file')";
         if ($conn->query($insertSQL)===TRUE) {
-
-        header("location:admin-dashboard.php?eid=$election_id");
+          $last_id = $conn->insert_id;
+          $insertIntoVotes = "INSERT into election_votes (election_id,election_candidate_id,election_vote) VALUES ($election_id,$last_id,0)";
+          if ($conn->query($insertIntoVotes)) {
+            # code...
+              header("location:admin-dashboard.php?eid=$election_id");
+          }else {
+            # code...
+            echo "Error: "."<br>" . $conn->error;
+          }
           # code...
         }else {
           # code...
@@ -206,6 +208,53 @@ if (isset($_POST['add-position'])) {
     # code...
     header("location:admin-dashboard.php");
   }
+}
+
+if (isset($_POST['submit-vote'])) {
+
+    $eid=$_REQUEST['eid'];
+    include 'dbconnect.php';
+  # code...
+    $getElectionId = "SELECT * from election_positions where election_id ='$eid'";
+    $getElectionidResult = $conn->query($getElectionId);
+    if ($getElectionidResult->num_rows>0) {
+      # code...
+      while ($row = $getElectionidResult->fetch_assoc()) {
+        $posID = $row['id'];
+        $_POST['$posID'];
+
+        $selectVoting = "SELECT * from election_votes where election_id = $eid AND election_candidate_id = $posId";
+        $getElectionVoting = $conn->query($selectVoting);
+          if ($getElectionVoting->num_rows>0) {
+            # code...
+            while ($election_row=$getElectionVoting->fetch_assoc()) {
+              # code...
+              $election_vote =$election_row['election_vote']+1;
+              $updateVote = "UPDATE election_votes set election_vote = $election_vote where election_id = $eid AND election_candidate_id = $posId";
+              if ($conn->query($updateVote)===TRUE) {
+                # code...
+                  echo "success";
+              }else {
+                # code...
+                echo "Error updating record: " . $conn->error;
+
+              }
+
+
+            }
+          }else {
+
+            echo "Error updating record: " . $conn->error;
+
+          }
+        }
+        # code...
+      }
+    else {
+      echo "Error updating record: " . $conn->error;
+
+    }
+
 }
 
  ?>

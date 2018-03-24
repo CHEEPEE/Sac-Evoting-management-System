@@ -113,11 +113,12 @@ include 'functions.php';
                              while ($sqlgetElectionAccessCodeDetails_rows = $sqlgetElectionAccessCodeDetailsResult->fetch_assoc()) {
 
                                $election_id = $sqlgetElectionAccessCodeDetails_rows['id'];
+                               $eletcion_access_code = $sqlgetElectionAccessCodeDetails_rows['election_access_code'];
 
                                  echo "<div class='list-group-item list-group-item-action'><div class='row'><div class='col-9'> "
                                  . $sqlgetElectionAccessCodeDetails_rows["election_name"]. " " . $sqlgetElectionAccessCodeDetails_rows["date_start"]. " " . $sqlgetElectionAccessCodeDetails_rows["date_end"]. "</div><div class='col-3'>
                                  <a href = '' ></i></a><a href =
-                                 'vote.php' ><i class='ml-3 icon ion-arrow-right-a'></i></a></div></div></div>";
+                                 'vote.php?eid=$election_id' ><i class='ml-3 icon ion-arrow-right-a'></i></a></div></div></div>";
                                # code...
 
                              }
