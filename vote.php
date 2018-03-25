@@ -54,12 +54,22 @@ include 'functions.php';
 
           <div id="list-example" class="list-group position-fixed">
 
-
-
-
           <?php
           if (isset($_REQUEST['eid'])) {
             # code..
+            $eid = $_REQUEST['eid'];
+            if (getElectionStatus($eid)=="false") {
+              # code...
+              header("location:student.php?m=end");
+            }
+            $student_id = $_SESSION['user_id'];
+            if (getVoteStatus($eid,$student_id)=='true') {
+              # code...
+              header("location:student.php?m=taken");
+            }
+
+
+
             $eid=$_REQUEST['eid'];
             $electionSql = "SELECT * from election_positions where election_id = $eid";
             $electionSqlResult = $conn->query($electionSql);
@@ -109,16 +119,21 @@ include 'functions.php';
                         # code...
                         while ($candiateSqlResultrow = $candiateSqlResult->fetch_assoc()) {
                           # code...
+                            $img = $candiateSqlResultrow['img_location'];
+                            $des = $candiateSqlResultrow['candidate_des'];
 
                         ?>
 
-                        <div class="input-group mt-3">
-                          <div class="input-group-prepend">
+                        <div class="input-group mt-3" data-toggle="tooltip" data-placement="right" title="<?php echo $des; ?>">
+                          <div class="input-group-prepend" >
+                            <image class='mr-3' src = '<?php echo $img; ?>' width='100px' height = '100px'>
                             <div class="input-group-text">
+
                             <input type="radio" name="<?php echo $posId ?>" aria-label="Radio button for following text input" value="<?php   echo $candiateSqlResultrow['candidate_id']; ?>">
                             </div>
                           </div>
-                          <input type="text" class="form-control" value="<?php   echo $candiateSqlResultrow['candidate_fname']; ?>" aria-label="Text input with radio button">
+
+                          <input type="text" class="form-control" value="<?php   echo $candiateSqlResultrow['candidate_fname']." ".$candiateSqlResultrow['candidate_mname']." ". $candiateSqlResultrow['candidate_lname'] ; ?>" aria-label="Text input with radio button">
                         </div>
                             <?php
                           }
@@ -143,7 +158,11 @@ include 'functions.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
   </body>
 
   <html>

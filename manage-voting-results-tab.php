@@ -3,7 +3,7 @@
     <div class="col-6">
       <div class="container">
         <div class="row">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-election-modal-lg">Add Election</button>
+
         </div>
       </div>
       <div class="container mt-3">
@@ -16,32 +16,26 @@
                // output data of each row
                while($row = $result->fetch_assoc()) {
                  $election_id = $row['id'];
-
+                 echo getAccessCodeFromElectionId($election_id);
                    echo "<div class='list-group-item list-group-item-action'>
                            <div class='row'>
                              <div class='col-9'> "
-                             . $row["election_name"]. " Date Start:" . $row["date_start"]. " Date End" . $row["date_end"]. "
+                             . $row["election_name"]. " " . $row["date_start"]. " " . $row["date_end"]. "
                              </div>
                              <div class='col-3'>
-                               <a href = 'admin-manage-election.php?eid=".$row['id']."' >
-                                <i class='icon ion-gear-a'>
+                               <a href = 'admin-manage-voting-results.php?veid=".$row['id']."' >
+                                <i class='icon ion-eye'>
                                 </i>
                               </a>
                               <a href =
                                'delete-evoting.php?electionid=".$row['id']."' >
-                               <i class='ml-3 mr-1 icon ion-close-circled'>
+                               <i class='ml-3 icon ion-close-circled'>
                                </i>
                                </a>
-                               <a href =
-                                'end-evoting.php?electionid=".$row['id']."' >
-                                End-Voting
-                                </a>
-                            </div>
-                            <div class='col-12'>
-                            ELection Access Code:<span class='badge badge-primary'> ".getAccessCodeFromElectionId($election_id)."</span>
                             </div>
                             </div>
                         </div>";
+
                    ?>
                    <?php
                }
@@ -57,57 +51,20 @@
       <div class="col-11">
 
            <?php
-           if (isset($_REQUEST['eid'])) {
+           if (isset($_REQUEST['veid'])) {
              ?>
 
              <div class="row mb-3">
-               <div class="col-3">
-                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-position-modal-lg">Add Position</button>
-               </div>
-               <div class="col-3">
-                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-add-party-list-modal-lg">Add Party-List</button>
-               </div>
+
 
              </div>
              <div id="accordion" class="mb-3">
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"  aria-controls="collapseOne">
-                    Manage Party List
-                      </button>
-                    </h5>
-                  </div>
 
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-
-                      <?php
-                     $election_id = $_REQUEST['eid'];
-                      $party_list_sql = "SELECT * FROM party_list WHERE election_id=$election_id";
-                      $partylist_result = $conn->query($party_list_sql);
-                      if ($partylist_result->num_rows>0) {
-                        # code...
-                        while ($row = $partylist_result->fetch_assoc()) {
-                          # code...
-                          $partid = $row['party_list_id'];
-
-                          echo $row['party_list_name']." <a href = 'edit-party-list.php?partid=$partid'>Edit</a> <a href = 'delete-party-list.php?partid=$partid'>delete</a><br>";
-                        }
-                      }else {
-                         echo "0 results";
-                      }
-
-                       ?>
-                    </div>
-                  </div>
-                </div>
               </div>
 
              <?php
              # code...
-             $election_id = $_REQUEST['eid'];
-
+             $election_id = $_REQUEST['veid'];
             $getPostions_sql = "SELECT * FROM election_positions WHERE election_id = $election_id";
             $getPositionRequest = $conn->query($getPostions_sql);
 
@@ -134,8 +91,8 @@
                               <div class="col-12">
                                   <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#bd-add-candidate-modal-lg<?php echo $position_id?>">Add Candidate</button>
                               </div>
-                              <?php   echo "<a class = 'ml-1' href='edit-position-name.php?posid=".$row['id']."'>   <i class='icon ion-edit mr-3'></i>Edit Postition Name<br></a> ";
-                                       echo "<a class = 'ml-1' href='delete-postion.php?posid=".$row['id']."'> <i class='icon ion-close-circled mr-3'></i>Delete Name<br></a> ";
+                              <?php   echo "<a class = 'ml-1' href='edit-position-name.php?posid=".$row['id']."'> <i class='large material-icons'>edit</i>Edit Postition Name<br></a> ";
+                                       echo "<a class = 'ml-1' href='delete-postion.php?posid=".$row['id']."'> <i class='large material-icons'>delete</i>Delete Name<br></a> ";
                                ?>
 
                               <div class="modal fade" id="bd-add-candidate-modal-lg<?php echo $position_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,11 +160,29 @@
                           while ($rowcandidate = $getCandidateResult->fetch_assoc()) {
                             $candid = $rowcandidate['candidate_id'];
                             $img = $rowcandidate['img_location'];
-
                              # code...
-                            echo "<div class='row container-fluid ml-1'>";
-                            echo "<div class = 'col-12'><image class='mr-3' src = '$img' width='100px' height = '100px'>";
-                            echo $rowcandidate['candidate_fname']." ".$rowcandidate['candidate_mname']." ".$rowcandidate['candidate_lname']." "." <a href = 'edit-candidate-name.php?candid=$candid'>Edit</a> <a href = 'delete-candidate.php?candid=$candid'>Delete</a><br></div></div>";
+                              ?>
+                            <div class='row container-fluid ml-1'>
+                              <div class = 'col-12'>
+                                <div class="row">
+                                  <div class="col-4">
+                                    <image src = '<?php echo $img; ?>' width='100px' height = '100px'>
+                                  </div>
+                                  <div class="col-4">
+                                    <?php    echo $rowcandidate['candidate_fname']." ".$rowcandidate['candidate_mname']." ".$rowcandidate['candidate_lname'];?>
+                                  </div>
+                                  <div class="col-4">
+
+                                    <span class="badge badge-primary"><?php echo candidateVoteCount($election_id,$candid); ?></span>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+
+
+                            <?php
 
                           }
                           # code...

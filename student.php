@@ -53,6 +53,20 @@ include 'functions.php';
       <div class="col-10">
 
       <?php
+      if (isset($_REQUEST['m'])) {
+        # code...echo "string";
+
+        if ($_REQUEST['m']=='end') {
+          echo "Selected Election Has Ended";
+          # code...
+        }
+        if ($_REQUEST['m']=='taken') {
+          echo "You can only vote once";
+          # code...
+        }
+      }
+
+
         if (isset($_POST['access-code'])) {
           # code...
 

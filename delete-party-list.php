@@ -7,7 +7,7 @@ $election_id = $_REQUEST['electionid'];
 $delete_position = "DELETE FROM party_list WHERE party_list_id = $partid;";
 
 if ($conn->query($delete_position) === TRUE) {
-    header("location:manage-election.php?electionid=$election_id");
+    header("location:admin-manage-election.php?electionid=$election_id");
 } else {
     echo "Error deleting record: " . $conn->error;
 }

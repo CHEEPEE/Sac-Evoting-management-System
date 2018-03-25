@@ -55,5 +55,51 @@ function validateInsertedAccessCode($student_id,$accessCode)
   }
 }
 
+function candidateVoteCount($election_id,$candidate_id){
+  include 'dbconnect.php';
+  $validateAccessCodeSql = "SELECT * from election_votes where election_id ='$election_id' AND election_candidate_id='$candidate_id'";
+  $sqlResult  = $conn->query($validateAccessCodeSql);
+
+  if ($sqlResult->num_rows>0) {
+    # code...
+      # code...Haru
+      while ($rows = $sqlResult->fetch_assoc()) {
+        # code...
+        return $rows['election_vote'];
+      }
+  }else {
+    return "error";
+  }
+
+}
+
+function getElectionStatus($eid){
+  include 'dbconnect.php';
+  $validateAccessCodeSql = "SELECT * from election where id ='$eid'";
+  $sqlResult  = $conn->query($validateAccessCodeSql);
+
+  if ($sqlResult->num_rows>0) {
+    # code...
+      # code...Haru
+      while ($rows = $sqlResult->fetch_assoc()) {
+        # code...
+        return $rows['ongoing'];
+      }
+  }else {
+    return "error";
+  }
+}
+function getVoteStatus($eid,$student_id){
+  include 'dbconnect.php';
+  $validateAccessCodeSql = "SELECT * from voted_students where eid ='$eid' AND student_id = '$student_id'";
+  $sqlResult  = $conn->query($validateAccessCodeSql);
+
+  if ($sqlResult->num_rows>0) {
+      return 'true';
+  }else {
+    return "error";
+  }
+}
+
 
 ?>

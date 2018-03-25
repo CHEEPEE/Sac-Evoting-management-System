@@ -27,6 +27,11 @@
         include 'department-management.php';
         include 'functions.php';
         $position_id;
+        if (isset($_REQUEST['eid'])) {
+          $eid = $_REQUEST['eid'];
+          # code...
+          header("location:admin-manage-election.php?eid=$eid");
+        }
 
   ?>
 
@@ -45,7 +50,6 @@
           <a class="nav-link" href="#">Profile</a>
         </li> -->
       </ul>
-
     </div>
   </nav>
   <div class="container-fluid">
@@ -54,11 +58,11 @@
     <div class="row">
       <div class="col-2">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Manage Election</a>
-          <a class="nav-link" id="v-pills-manage-student-tab" data-toggle="pill" href="#v-pills-manage-student" role="tab" aria-controls="v-pills-manage-student" aria-selected="false">Manage Students</a>
+          <a class="nav-link active" id="v-pills-home-tab" href="admin-manage-election.php" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Manage Election</a>
+          <a class="nav-link" id="v-pills-manage-student-tab"  href="admin-manage-students.php" data-toggle="pill" href="#v-pills-manage-student" role="tab" aria-controls="v-pills-manage-student" aria-selected="false">Manage Students</a>
 
-          <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Manage Voting Results</a>
-          <a class="nav-link" id="v-pills-year-course-tab" data-toggle="pill" href="#v-pills-year-course" role="tab" aria-controls="v-pills-year-course" aria-selected="false">Manage Department</a>
+          <a class="nav-link" id="v-pills-settings-tab"  href="admin-manage-voting-results.php" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Manage Voting Results</a>
+          <a class="nav-link" id="v-pills-year-course-tab"  href="admin-manage-department.php" data-toggle="pill" href="#v-pills-year-course" role="tab" aria-controls="v-pills-year-course" aria-selected="false">Manage Department</a>
         </div>
       </div>
 
@@ -219,6 +223,10 @@
                           <ul class="list-group list-group-flush">
 
 
+
+
+
+
                           <?php
                             $courselistSql = "SELECT * FROM course WHERE department_id = '".$row['department_id']."'";
                             $courseListResult = $conn->query($courselistSql);
@@ -295,8 +303,6 @@
 </div>
 
   <?php include 'modals.php'; ?>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

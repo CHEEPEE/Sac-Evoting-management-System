@@ -9,7 +9,10 @@ if ($postResult->num_rows>0) {
   while ($rowpos = $postResult->fetch_assoc()) {
     ?>
     <form class="" method="POST" action="update-candidate-name.php?candid=<?php echo $candid;?>" method="post">
-      <input type="text" name="candidate-name" value="<?php echo $rowpos['candidate_name']; ?>">
+      <input type="text" name="candidate-fname" value="<?php echo $rowpos['candidate_fname']; ?>">
+        <input type="text" name="candidate-mname" value="<?php echo $rowpos['candidate_mname']; ?>">
+          <input type="text" name="candidate-lname" value="<?php echo $rowpos['candidate_lname']; ?>">
+
       <input type="submit">
     </form>
 

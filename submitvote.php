@@ -4,6 +4,8 @@ if (isset($_POST['submit-vote'])) {
 
     $eid=$_REQUEST['eid'];
     include 'dbconnect.php';
+    session_start();
+    $student_id =   $_SESSION['user_id'];
   # code...
     $getElectionId = "SELECT * from election_positions where election_id ='$eid'";
     $getElectionidResult = $conn->query($getElectionId);
@@ -27,6 +29,7 @@ if (isset($_POST['submit-vote'])) {
                 if ($conn->query($updateVote)===TRUE) {
                   # code...
                     echo "success";
+
                 }else {
                   # code...
                   echo "UPDATE election_votes set election_vote = $election_vote where election_id = $eid AND election_candidate_id = $posId " . $conn->error;
@@ -53,8 +56,13 @@ if (isset($_POST['submit-vote'])) {
     }
 
 }
+header("location:student.php");
+$sqlVoted = "INSERT INTO voted_students (eid,student_id) VALUES ('$eid','$student_id')";
+if ($conn->query($sqlVoted)===TRUE) {
+  # code...
+    echo "success";
 
-include 'dbconnect.php';
+}
 
 
 ?>
