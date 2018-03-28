@@ -32,6 +32,11 @@
                                <i class='ml-3 icon ion-close-circled'>
                                </i>
                                </a>
+                               <a href =
+                                'print-result-evoting.php?electionid=".$row['id']."' >
+                                <i class='ml-3 icon ion-printer'>
+                                </i>
+                                </a>
                             </div>
                             </div>
                         </div>";

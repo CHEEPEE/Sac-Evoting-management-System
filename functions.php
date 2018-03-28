@@ -93,7 +93,6 @@ function getVoteStatus($eid,$student_id){
   include 'dbconnect.php';
   $validateAccessCodeSql = "SELECT * from voted_students where eid ='$eid' AND student_id = '$student_id'";
   $sqlResult  = $conn->query($validateAccessCodeSql);
-
   if ($sqlResult->num_rows>0) {
       return 'true';
   }else {

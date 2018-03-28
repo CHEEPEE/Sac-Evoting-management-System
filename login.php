@@ -23,16 +23,25 @@
             <div class="collapse navbar-collapse" id="navcol-1"></div>
         </div>
     </nav>
+
     <div class="form-one"><i class="fa fa-user" id="icon1"></i>
         <form class="form-horizontal custom-form" action="checklogin.php" method="post">
-            <h1 id="header1">Student Login </h1>
+          <?php
+            if (isset($_REQUEST['err'])) {
+              # code...
+              if ($_REQUEST['err'] == "error") {
+                echo "Login Error";
+                # code...
+              }
+            }
+            ?>
+            <h1 id="header1">User Login </h1>
             <label class="reg-label">Username: </label>
             <input required class="form-control inputbar" type="text" name = 'username' placeholder="Enter Student ID">
             <label class="reg-label">Password: </label>
             <input required class="form-control inputbar" type="password" name ="password" placeholder="Enter Password">
             <input type="submit" class="btn btn-default" id="login" value="Log in"/>
         </form>
-    <p class="text-center par">Don't have an account yet? Register <a href="registration.html" id="a1" class="candidates">here</a>.</p>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

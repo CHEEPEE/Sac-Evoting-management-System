@@ -45,7 +45,7 @@ include 'functions.php';
         <button class="btn btn-outline-success text-white border border-light my-2 my-sm-0" name="access-code" type="submit">Access Election</button>
       </form>
 
-      <button type="button" class="btn btn-light"><a class="text-dark" href="#">Log Out</a></button>
+      <button type="button" class="btn btn-light"><a class="text-dark" href="logout.php">Log Out</a></button>
 
     </nav>
 
@@ -82,7 +82,7 @@ include 'functions.php';
                 $stdnAccessCodeInsertSql = "INSERT INTO registerd_student (student_id,election_access_code) VALUES ('$student_id',$code)";
                 if ($conn->query($stdnAccessCodeInsertSql)) {
                   # code...
-                  echo "fhfghfhg";
+
                 }else {
                   # code...
                   echo "Error: " . $sql . "<br>" . $conn->error;

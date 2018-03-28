@@ -18,7 +18,7 @@ if ($loginresult->num_rows>0) {
       header("location:admin-manage-election.php");
     }else {
       # code...
-
+      header("location:login.php?err=error");
 
     }
   }
@@ -35,7 +35,7 @@ if ($loginresult->num_rows>0) {
 
     }
   }else {
-  echo "Login Failed";
+    header("location:login.php?err=error");
   };
 }
 
