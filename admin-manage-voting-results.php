@@ -18,6 +18,19 @@
       body{
         margin: 0 auto;
       }
+       .footer9{
+        background-color: #292c2f;
+        color: #fff;
+        margin:-20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 40px;
+        margin-top: 50vh;
+
+      }
+      #foot-head1{
+        font-family: Allura,cursive;
+      }
     </style>
   </head>
 
@@ -62,7 +75,7 @@
     </div>
 
   </div>
-   <footer class="footer9">
+ <footer class="footer9">
         <div class="row" id="row1">
             <div class="col-md-3 col-md-offset-0 col-sm-6 footer-navigation" id="col1">
                 <h3 id="foot-head1"> St. Anthony's College</h3>
@@ -70,22 +83,21 @@
             </div>
             <div class="col-md-3 footer-contacts">
                 <div id="sec1"><i class="fa fa-phone footer-contacts-icon"></i>
-                    <p id="par2" class="footer-center-info email"> (036) 540-9238</p>
+                    <p id="par2" class="ficon ion-ios-telephone-outline"> (036) 540-9238</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 footer-contacts">
-                <div id="sec3"><i class="fa fa-fax footer-contacts-icon"></i>
-                    <p id="par3">(036) 540-9971; 540-9196 </p>
+                <div id="sec3"><i class=""></i>
+                    <p id="par3" class="icon ion-ios-telephone-outline"> (036) 540-9971; 540-9196 </p>
                 </div>
             </div>
             <div class="col-md-3 footer-contacts">
-                <div id="sec2"><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p id="par1"><span class="new-line-span">San Jose de Buenavista</span> Antique, Philippines</p>
+                <div id="sec2"><span class=""> </span>
+                    <p id="par1"><span class="new-line-span ion-ios-location"> San Jose de Buenavista</span> Antique, Philippines</p>
                 </div>
             </div>
             <div class="clearfix visible-sm-block"></div>
         </div>
     </footer>
-
 </body>
 </html>

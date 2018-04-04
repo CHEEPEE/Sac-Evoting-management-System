@@ -32,6 +32,16 @@ include 'functions.php';
        body{
          margin: 0 auto;
        }
+            .footer9{
+        background-color: #292c2f;
+        color: #fff;
+        margin:-20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 40px;
+        margin-top: 50vh;
+
+      }
      </style>
    </head>
    <body>
@@ -164,5 +174,29 @@ include 'functions.php';
       })
     </script>
   </body>
+   <footer class="footer9">
+        <div class="row" id="row1">
+            <div class="col-md-3 col-md-offset-0 col-sm-6 footer-navigation" id="col1">
+                <h3 id="foot-head1"> St. Anthony's College</h3>
+                <p class="company-name">Copyright © 2017 </p>
+            </div>
+            <div class="col-md-3 footer-contacts">
+                <div id="sec1"><i class="fa fa-phone footer-contacts-icon"></i>
+                    <p id="par2" class="ficon ion-ios-telephone-outline"> (036) 540-9238</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 footer-contacts">
+                <div id="sec3"><i class=""></i>
+                    <p id="par3" class="icon ion-ios-telephone-outline"> (036) 540-9971; 540-9196 </p>
+                </div>
+            </div>
+            <div class="col-md-3 footer-contacts">
+                <div id="sec2"><span class=""> </span>
+                    <p id="par1"><span class="new-line-span ion-ios-location"> San Jose de Buenavista</span> Antique, Philippines</p>
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+        </div>
+    </footer>
 
   <html>
