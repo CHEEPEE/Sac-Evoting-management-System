@@ -1,6 +1,6 @@
 <?php
      include 'dbconnect.php';
-     include 'bootstrap.php';
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/footer.css">
+    <style type="text/css">
+        
+        
+        #welcome{
+            height: 80vh;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,18 +33,16 @@
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li role="presentation"><a href="landing3.html">Elementary </a></li>
-                    <li role="presentation"><a href="landing2.html"> High School</a></li>
-                    <li class="active" role="presentation"><a href="landing.html">College </a></li>
-                </ul><a class="btn btn-default navbar-btn navbar-right" role="button" href="login.html" id="btnA">Login</a><a class="btn btn-default navbar-btn navbar-right" role="button" href="Registration.html">Register ID</a></div>
+                   
+                </ul><a class="btn btn-default navbar-btn navbar-right" role="button" href="login.php" id="btnA">Login</a></div>
         </div>
     </nav>
     <div id="welcome">
         <div class="jumbotron">
-            <h1>Notice! </h1>
-            <p>The election will start at 9 AM.</p>
+            <h1>Welcome!</h1>
+            <h2>SAC Electronic Voting</h2>
             <p>
-                <button class="btn btn-default" type="submit">Learn more</button>
+               <a href = "login.php"> <button class="btn btn-default" type="submit">Log In</button></a>
             </p>
             <div class="modal fade" role="dialog" tabindex="-1">
                 <div class="modal-dialog" role="document">
@@ -57,102 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="candidates-section">
-        <div class="container site-sections" id="intro">
-            <h1>Leading College Candidates</h1>
-            <div class="row" id="lead">
-                <div class="col-md-4 lead">
-                    <h3>President </h3>
-                    
-             <?php
-                    $election_id;
-        $getLatestElection ="SELECT * FROM election ORDER BY id DESC LIMIT 1";
-            $getLatestElectionResult =$conn->query($getLatestElection);
-                if ($getLatestElectionResult->num_rows>0) {
-                    while ($rowElection = $getLatestElectionResult->fetch_assoc()){
-                        $election_id = $rowElection['id'];
-                        
-                    }
-                }
-                    
-        $getCandidatessql = "SELECT * FROM candidates WHERE election_id=$election_id";
-         $getCandidateResult =$conn->query($getCandidatessql);
-         if ($getCandidateResult->num_rows>0) {
-           while ($rowcandidate = $getCandidateResult->fetch_assoc()) {
-             # code...
-             echo $rowcandidate['candidate_name']."<br>";
-           }
-           # code...
-         }
-                    ?>
-                </div>
-                <div class="col-md-4 lead">
-                    <h3>Vice President</h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-                <div class="col-md-4 lead">
-                    <h3>Governor </h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-                <div class="col-md-4 lead">
-                    <h3>Vice-Governor </h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-                <div class="col-md-4 lead">
-                    <h3>Representative </h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-                <div class="col-md-4 lead">
-                    <h3>Mayor </h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-                <div class="col-md-12 lead">
-                    <h3>Vice Mayor </h3>
-                    <p>1. Paragraph</p>
-                    <p>2. Paragraph</p>
-                    <p>3. Paragraph</p>
-                    <p>4. Paragraph</p>
-                    <p>5. Paragraph</p>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" role="dialog" tabindex="-1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Modal Title</h4></div>
-                    <div class="modal-body">
-                        <p>The content of your modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="button">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <footer class="footer9">
         <div class="row" id="row1">
             <div class="col-md-3 col-md-offset-0 col-sm-6 footer-navigation" id="col1">
